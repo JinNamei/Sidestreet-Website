@@ -43,16 +43,21 @@ export default function VinylRecord({ startIndex = 0 }: VinylRecordProps) {
   const outerSize = 500;
   const cx = outerSize / 2;
   const cy = outerSize / 2;
-  const textR = outerSize / 2 - 16;
+  const textR = discSize / 2 + 36;
+  const brR2 = textR + 16;
   const discOffset = (outerSize - discSize) / 2;
 
-  // Top-left arc: 110° centered ~11 o'clock (midpoint 330°)
+  // Top-left arc: 110° centered ~11 o'clock
   const tlStart = circlePoint(cx, cy, textR, 275);
   const tlEnd = circlePoint(cx, cy, textR, 25);
 
-  // Bottom-right arc: 110° centered ~5 o'clock (midpoint 150°)
+  // Bottom-right arc line 1: 110° centered ~5 o'clock
   const brStart = circlePoint(cx, cy, textR, 95);
   const brEnd = circlePoint(cx, cy, textR, 205);
+
+  // Bottom-right arc line 2 (slightly further out for second line)
+  const br2Start = circlePoint(cx, cy, brR2, 95);
+  const br2End = circlePoint(cx, cy, brR2, 205);
 
   return (
     <div
@@ -134,23 +139,25 @@ export default function VinylRecord({ startIndex = 0 }: VinylRecordProps) {
         className="absolute inset-0 pointer-events-none"
       >
         <defs>
-          {/* Top-left arc: 110° clockwise, centered ~11 o'clock */}
           <path
             id={`topLeftArc-${uid}`}
             d={`M ${tlStart.x.toFixed(1)},${tlStart.y.toFixed(1)} A ${textR},${textR} 0 0,1 ${tlEnd.x.toFixed(1)},${tlEnd.y.toFixed(1)}`}
           />
-          {/* Bottom-right arc: 110° counter-clockwise so text faces outward */}
           <path
-            id={`bottomRightArc-${uid}`}
+            id={`brArc1-${uid}`}
             d={`M ${brEnd.x.toFixed(1)},${brEnd.y.toFixed(1)} A ${textR},${textR} 0 0,0 ${brStart.x.toFixed(1)},${brStart.y.toFixed(1)}`}
+          />
+          <path
+            id={`brArc2-${uid}`}
+            d={`M ${br2End.x.toFixed(1)},${br2End.y.toFixed(1)} A ${brR2},${brR2} 0 0,0 ${br2Start.x.toFixed(1)},${br2Start.y.toFixed(1)}`}
           />
         </defs>
 
         <text
           fill="black"
-          fontSize="13"
+          fontSize="16"
           fontFamily="'Space Mono', monospace"
-          letterSpacing="10"
+          letterSpacing="14"
           fontWeight="700"
         >
           <textPath
@@ -164,18 +171,35 @@ export default function VinylRecord({ startIndex = 0 }: VinylRecordProps) {
 
         <text
           fill="black"
-          fontSize="9.5"
+          fontSize="11"
           fontFamily="'Space Mono', monospace"
           fontStyle="italic"
           fontWeight="700"
           letterSpacing="0.5"
         >
           <textPath
-            href={`#bottomRightArc-${uid}`}
+            href={`#brArc1-${uid}`}
             startOffset="50%"
             textAnchor="middle"
           >
-            for listeners. for those who love artists over the algorithm
+            for listeners. for those who love artists
+          </textPath>
+        </text>
+
+        <text
+          fill="black"
+          fontSize="11"
+          fontFamily="'Space Mono', monospace"
+          fontStyle="italic"
+          fontWeight="700"
+          letterSpacing="0.5"
+        >
+          <textPath
+            href={`#brArc2-${uid}`}
+            startOffset="50%"
+            textAnchor="middle"
+          >
+            over the algorithm
           </textPath>
         </text>
       </svg>
