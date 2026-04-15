@@ -73,11 +73,11 @@ export default function JoinModal({ isOpen, onClose }: JoinModalProps) {
 
         {submitted ? (
           <div className="text-center py-12">
-            <p className="text-xl font-bold text-black">you&apos;re on the list.</p>
+            <p className="text-xl text-black">you&apos;re on the list.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            <h2 className="text-xl font-bold text-black uppercase tracking-wider mb-2">
+            <h2 className="text-xl text-black uppercase tracking-wider mb-2">
               Join the Club
             </h2>
 
@@ -135,7 +135,7 @@ export default function JoinModal({ isOpen, onClose }: JoinModalProps) {
 
             <button
               type="submit"
-              className="bg-orange text-white font-bold py-3 rounded hover:opacity-90 transition-opacity cursor-pointer uppercase tracking-wider text-sm"
+              className="bg-orange text-white py-3 rounded hover:opacity-90 transition-opacity cursor-pointer uppercase tracking-wider text-sm"
             >
               Submit
             </button>

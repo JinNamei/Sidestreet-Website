@@ -1,31 +1,24 @@
 "use client";
 
-import SidestreetLogo from "./SidestreetLogo";
-
 const teamMembers = [
-  { name: "Naomi Kim", role: "product", image: "https://picsum.photos/seed/team1/400/400" },
-  { name: "Leanne Park", role: "product", image: "https://picsum.photos/seed/team2/400/400" },
-  { name: "Nolan Ralls", role: "growth", image: "https://picsum.photos/seed/team3/400/400" },
-  { name: "Elliot Cruz", role: "artistry", image: "https://picsum.photos/seed/team4/400/400" },
-  { name: "Naomi Kim", role: "business", image: "https://picsum.photos/seed/team5/400/400" },
-  { name: "Leanne Park", role: "product", image: "https://picsum.photos/seed/team6/400/400" },
-  { name: "Nolan Ralls", role: "growth", image: "https://picsum.photos/seed/team7/400/400" },
-  { name: "Elliot Cruz", role: "artistry", image: "https://picsum.photos/seed/team8/400/400" },
+  { name: "Naomi Kim", role: "growth", image: "/naomi.jpeg" },
+  { name: "Leanne Park", role: "product", image: "/leanne.jpeg" },
+  { name: "Nolan Ralls", role: "growth", image: "/nolan.jpeg" },
+  { name: "Elliot Cruz", role: "artist relations", image: "/elliot.jpg" },
+  { name: "Ashrit Anala", role: "engineering", image: "/ashrit.jpg" },
+  { name: "Neil Ghosh", role: "engineering", image: "/neil.jpeg" },
+  { name: "Aymen Bekri", role: "engineering", image: "/aymen.jpeg" },
+  { name: "Adib Khandaker", role: "engineering", image: "/adib.jpeg" },
 ];
 
 export default function TeamSection() {
   return (
     <section
       id="team"
-      className="relative min-h-screen bg-white px-8 py-24"
+      className="relative min-h-[75vh] bg-white px-8 pb-24 pt-[4.5rem]"
     >
-      {/* Logo — always visible */}
-      <div className="absolute top-8 left-8">
-        <SidestreetLogo />
-      </div>
-
-      <div className="max-w-4xl mx-auto pt-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-black uppercase tracking-wider text-center mb-16">
+      <div className="mx-auto max-w-4xl pt-12">
+        <h2 className="mb-12 text-center text-3xl uppercase tracking-wider text-black md:text-4xl">
           Who Are We?
         </h2>
 
@@ -40,7 +33,7 @@ export default function TeamSection() {
                   draggable={false}
                 />
               </div>
-              <p className="text-orange font-bold text-sm tracking-wide">
+              <p className="text-orange text-sm tracking-wide">
                 {member.name}
               </p>
               <p className="text-black text-xs tracking-wide mt-1">

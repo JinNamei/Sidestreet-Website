@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useCallback, useId } from "react";
+import { useState, useCallback, useId, useRef, useEffect } from "react";
 
 const IMAGES = [
-  "https://picsum.photos/seed/vinyl1/800/800",
-  "https://picsum.photos/seed/vinyl2/800/800",
-  "https://picsum.photos/seed/vinyl3/800/800",
-  "https://picsum.photos/seed/vinyl4/800/800",
+  "/background1.jpeg",
+  "/background2.jpg",
+  "/background3.jpg",
+  "/background4.jpg",
 ];
 
 interface VinylRecordProps {
@@ -27,17 +27,48 @@ export default function VinylRecord({ startIndex = 0 }: VinylRecordProps) {
   const [transitioning, setTransitioning] = useState(false);
   const uid = useId().replace(/:/g, "");
 
+  const isTransitioningRef = useRef(false);
+  const currentIndexRef = useRef(startIndex);
+  const fadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+
+  useEffect(() => {
+    return () => {
+      if (fadeTimeoutRef.current != null) {
+        clearTimeout(fadeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  /** Only animate opacity while crossfading; idle state must snap to opacity 1 or the bottom layer re-fades in after the top img unmounts (flash). */
+  const crossfadeActive = transitioning || nextIndex !== null;
+
   const cyclePhoto = useCallback(() => {
-    if (transitioning) return;
-    const next = (currentIndex + 1) % IMAGES.length;
+    if (isTransitioningRef.current) return;
+    isTransitioningRef.current = true;
+
+    const next = (currentIndexRef.current + 1) % IMAGES.length;
+
+    if (fadeTimeoutRef.current != null) {
+      clearTimeout(fadeTimeoutRef.current);
+      fadeTimeoutRef.current = null;
+    }
+
     setNextIndex(next);
     setTransitioning(true);
-    setTimeout(() => {
+
+    fadeTimeoutRef.current = setTimeout(() => {
+      fadeTimeoutRef.current = null;
+      isTransitioningRef.current = false;
       setCurrentIndex(next);
+      currentIndexRef.current = next;
       setNextIndex(null);
       setTransitioning(false);
     }, 500);
-  }, [currentIndex, transitioning]);
+  }, []);
 
   const discSize = 360;
   const outerSize = 500;
@@ -82,16 +113,24 @@ export default function VinylRecord({ startIndex = 0 }: VinylRecordProps) {
           <img
             src={IMAGES[currentIndex]}
             alt=""
-            className="vinyl-photo-transition absolute inset-0 w-full h-full object-cover"
-            style={{ opacity: transitioning ? 0 : 1 }}
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{
+              opacity: transitioning ? 0 : 1,
+              transition: crossfadeActive
+                ? "opacity 0.5s ease"
+                : "none",
+            }}
             draggable={false}
           />
           {nextIndex !== null && (
             <img
               src={IMAGES[nextIndex]}
               alt=""
-              className="vinyl-photo-transition absolute inset-0 w-full h-full object-cover"
-              style={{ opacity: 1 }}
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{
+                opacity: 1,
+                transition: "opacity 0.5s ease",
+              }}
               draggable={false}
             />
           )}
@@ -155,10 +194,12 @@ export default function VinylRecord({ startIndex = 0 }: VinylRecordProps) {
 
         <text
           fill="black"
-          fontSize="16"
-          fontFamily="'Space Mono', monospace"
+          fontSize="32"
           letterSpacing="14"
-          fontWeight="700"
+          style={{
+            fontFamily:
+              "var(--font-geist-mono), ui-monospace, monospace",
+          }}
         >
           <textPath
             href={`#topLeftArc-${uid}`}
@@ -172,10 +213,12 @@ export default function VinylRecord({ startIndex = 0 }: VinylRecordProps) {
         <text
           fill="black"
           fontSize="11"
-          fontFamily="'Space Mono', monospace"
           fontStyle="italic"
-          fontWeight="700"
           letterSpacing="0.5"
+          style={{
+            fontFamily:
+              "var(--font-geist-mono), ui-monospace, monospace",
+          }}
         >
           <textPath
             href={`#brArc1-${uid}`}
@@ -189,10 +232,12 @@ export default function VinylRecord({ startIndex = 0 }: VinylRecordProps) {
         <text
           fill="black"
           fontSize="11"
-          fontFamily="'Space Mono', monospace"
           fontStyle="italic"
-          fontWeight="700"
           letterSpacing="0.5"
+          style={{
+            fontFamily:
+              "var(--font-geist-mono), ui-monospace, monospace",
+          }}
         >
           <textPath
             href={`#brArc2-${uid}`}

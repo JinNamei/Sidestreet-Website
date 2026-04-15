@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
-import { Space_Mono } from "next/font/google";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
-
-const spaceMono = Space_Mono({
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  variable: "--font-space-mono",
-});
 
 export const metadata: Metadata = {
   title: "SIDESTREET",
@@ -20,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceMono.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={GeistMono.variable}>
+      <body className={GeistMono.className}>{children}</body>
     </html>
   );
 }
