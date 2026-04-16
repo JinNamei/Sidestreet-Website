@@ -225,7 +225,7 @@ export default function VinylRecord({ startIndex = 0 }: VinylRecordProps) {
             startOffset="50%"
             textAnchor="middle"
           >
-            for listeners. for those who love artists
+            for listeners who care about artists
           </textPath>
         </text>
 
@@ -244,7 +244,7 @@ export default function VinylRecord({ startIndex = 0 }: VinylRecordProps) {
             startOffset="50%"
             textAnchor="middle"
           >
-            over the algorithm
+            not the algorithm
           </textPath>
         </text>
       </svg>

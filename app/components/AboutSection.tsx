@@ -15,11 +15,11 @@ export default function AboutSection() {
         </h2>
 
         <p className="text-sky italic text-base md:text-lg mb-6 leading-relaxed">
-          we&apos;re a platform for artists to meet the listener, where both need to be met.
+        Sidestreet is a community-powered listening ecosystem for listeners who care about artists, not algorithms.
         </p>
 
         <p className="text-black text-sm md:text-base leading-relaxed mb-4">
-          at sidestreet, we fight against the endless algorithm. we fight for art, for the artist.
+        Sidestreet connects listeners and artists to reimagine how music is discovered and experienced. Listen together, show up for events, and share new finds.
         </p>
 
         <TicketButton />
