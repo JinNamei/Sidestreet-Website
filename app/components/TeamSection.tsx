@@ -4,7 +4,7 @@ const teamMembers = [
   { name: "Naomi Kim", role: "growth", image: "/naomi.jpeg" },
   { name: "Leanne Park", role: "product", image: "/leanne.jpeg" },
   { name: "Nolan Ralls", role: "growth", image: "/nolan.jpeg" },
-  { name: "Elliot Cruz", role: "artist relations", image: "/elliot.jpg" },
+  { name: "Elliot Cruz", role: "artist relations", image: "/elliot.JPG" },
   { name: "Ashrit Anala", role: "engineering", image: "/ashrit.jpg" },
   { name: "Neil Ghosh", role: "engineering", image: "/neil.jpeg" },
   { name: "Aymen Bekri", role: "engineering", image: "/aymen.jpeg" },
